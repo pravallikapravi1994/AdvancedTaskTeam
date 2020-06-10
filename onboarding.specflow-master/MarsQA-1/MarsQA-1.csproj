@@ -168,12 +168,12 @@
     <Compile Include="FeaturefileSteps\_3ProfileSteps.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Featurefiles\3Profile.feature" />
     <None Include="Featurefiles\4ShareSkill.feature" />
     <None Include="App.config" />
     <None Include="Featurefiles\2Login.feature" />
     <None Include="Featurefiles\1Register.feature" />
     <None Include="license" />
-    <None Include="Featurefiles\3Profile.feature" />
     <None Include="packages.config" />
     <None Include="SpecflowTests\Data\NewData.xlsx" />
     <None Include="SpecflowTests\Data\ProfileData.xlsx" />

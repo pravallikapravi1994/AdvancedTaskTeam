@@ -1,8 +1,10 @@
 ﻿using MarsQA_1.Helpers;
+using MongoDB.Driver.Core.Events;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Linq.Expressions;
 using System.Threading;
 
 
@@ -89,6 +91,26 @@ namespace MarsQA_1.SpecflowPages.Pages
         private static IWebElement GradutionYearDropDown => Driver.driver.FindElement(By.XPath("//select[@name='yearOfGraduation']"));
 
         private static IWebElement AddButtonEducationData => Driver.driver.FindElement(By.XPath("//input[@value='Add']"));
+
+        private static IWebElement EducationDataCountryFirstrow => Driver.driver.FindElement(By.XPath("//*[@data-tab='third']//tbody[1]//td[1]"));
+
+        private static IWebElement EducationDataUniveristyFirstrow => Driver.driver.FindElement(By.XPath("//*[@data-tab='third']//tbody[1]//td[2]"));
+
+
+        private static IWebElement EducationDataTitleFirstrow => Driver.driver.FindElement(By.XPath("//*[@data-tab='third']//tbody[1]//td[3]"));
+
+        private static IWebElement EducationDataDegreeFirstrow => Driver.driver.FindElement(By.XPath("//*[@data-tab='third']//tbody[1]//td[4]"));
+
+         private static IWebElement EducationDataGradYearFirstrow => Driver.driver.FindElement(By.XPath("//*[@data-tab='third']//tbody[1]//td[5]"));
+
+
+        private static IWebElement EducationEditiconFirst => Driver.driver.FindElement(By.XPath("//*[@data-tab='third']//tbody[1]//td[6]/span[1]"));
+
+
+        private static IWebElement EducationDeleteiconFirst => Driver.driver.FindElement(By.XPath("//*[@data-tab='third']//tbody[1]//td[6]/span[2]"));
+
+
+        private static IWebElement UpdateButtonEducationData => Driver.driver.FindElement(By.XPath("//input[@value='Update']"));
 
 
 
@@ -269,10 +291,14 @@ namespace MarsQA_1.SpecflowPages.Pages
 
 
 
+            Thread.Sleep(3000);
             SelectElement Yeardrop = new SelectElement(GradutionYearDropDown);
             Yeardrop.SelectByText(ExcelLibHelper.ReadData(2, "Year"));
 
+
+            Thread.Sleep(3000);
             AddButtonEducationData.Click();
+            Thread.Sleep(5000);
 
         }
 
@@ -288,6 +314,34 @@ namespace MarsQA_1.SpecflowPages.Pages
         public static void EditEducation()
 
         {
+            ExcelLibHelper.PopulateInCollection(@"C:\AdvancedTaskLevel1\onboarding.specflow-master\MarsQA-1\SpecflowTests\Data\ProfileData.xlsx", "Education");
+
+            EducationEditiconFirst.Click();
+
+            CollegeName.Clear();
+
+            CollegeName.SendKeys(ExcelLibHelper.ReadData(3, "CollegeName"));
+
+            SelectElement country = new SelectElement(CountryDropdown);
+            country.SelectByText(ExcelLibHelper.ReadData(3, "CountryOfCollege"));
+
+            SelectElement Titledrop = new SelectElement(TitleDropdown);
+            Titledrop.SelectByText(ExcelLibHelper.ReadData(3, "TitleDrop"));
+
+            Degree.Clear();
+
+            Degree.SendKeys(ExcelLibHelper.ReadData(3, "Degree"));
+
+
+
+            Thread.Sleep(3000);
+            SelectElement Yeardrop = new SelectElement(GradutionYearDropDown);
+            Yeardrop.SelectByText(ExcelLibHelper.ReadData(3, "Year"));
+
+
+            Thread.Sleep(3000);
+            UpdateButtonEducationData.Click();
+            Thread.Sleep(5000);
 
         }
 
@@ -301,6 +355,7 @@ namespace MarsQA_1.SpecflowPages.Pages
         public static void DeleteEducation()
 
         {
+            EducationDeleteiconFirst.Click();
 
         }
 
@@ -313,6 +368,40 @@ namespace MarsQA_1.SpecflowPages.Pages
         public static void VerifyAddEducation()
 
         {
+
+
+            var actualCountry = EducationDataCountryFirstrow.Text;
+            var ExpCountry = ExcelLibHelper.ReadData(2, "CountryOfCollege");
+
+            var actualColl = EducationDataUniveristyFirstrow.Text;
+            var ExpColl = ExcelLibHelper.ReadData(2, "CollegeName");
+
+
+            var actualTitle = EducationDataTitleFirstrow.Text;
+            var ExpTitle = ExcelLibHelper.ReadData(2, "TitleDrop");
+
+            var actualDegree = EducationDataDegreeFirstrow.Text;
+            var ExpDegree = ExcelLibHelper.ReadData(2, "Degree");
+
+            var actualYear = EducationDataGradYearFirstrow.Text;
+            var ExpYear = ExcelLibHelper.ReadData(2, "Year");
+
+
+
+
+
+
+
+            Assert.AreEqual(actualCountry, ExpCountry, "Country is not added");
+
+            Assert.AreEqual(actualColl, ExpColl, "College is not added");
+
+            Assert.AreEqual(actualTitle, ExpTitle, "Title is not added");
+
+            Assert.AreEqual(actualDegree, ExpDegree, "Degree is not added");
+
+
+            Assert.AreEqual(actualYear, ExpYear, "Year is not added");
 
         }
 
@@ -330,6 +419,38 @@ namespace MarsQA_1.SpecflowPages.Pages
         public static void VerifyEditEducation()
 
         {
+            var actualCountry = EducationDataCountryFirstrow.Text;
+            var ExpCountry = ExcelLibHelper.ReadData(3, "CountryOfCollege");
+
+            var actualColl = EducationDataUniveristyFirstrow.Text;
+            var ExpColl = ExcelLibHelper.ReadData(3, "CollegeName");
+
+
+            var actualTitle = EducationDataTitleFirstrow.Text;
+            var ExpTitle = ExcelLibHelper.ReadData(3, "TitleDrop");
+
+            var actualDegree = EducationDataDegreeFirstrow.Text;
+            var ExpDegree = ExcelLibHelper.ReadData(3, "Degree");
+
+            var actualYear = EducationDataGradYearFirstrow.Text;
+            var ExpYear = ExcelLibHelper.ReadData(3, "Year");
+
+
+
+
+
+
+
+            Assert.AreEqual(actualCountry, ExpCountry, "Country is not updated");
+
+            Assert.AreEqual(actualColl, ExpColl, "College is not updated");
+
+            Assert.AreEqual(actualTitle, ExpTitle, "Title is not updated");
+
+            Assert.AreEqual(actualDegree, ExpDegree, "Degree is not updated");
+
+
+            Assert.AreEqual(actualYear, ExpYear, "Year is not updated");
 
         }
 
@@ -337,6 +458,54 @@ namespace MarsQA_1.SpecflowPages.Pages
         public static void VerifyDeleteEducation()
 
         {
+            try
+            {
+                var actualCountry = EducationDataCountryFirstrow.Text;
+                var ExpCountry = ExcelLibHelper.ReadData(3, "CountryOfCollege");
+
+                var actualColl = EducationDataUniveristyFirstrow.Text;
+                var ExpColl = ExcelLibHelper.ReadData(3, "CollegeName");
+
+
+                var actualTitle = EducationDataTitleFirstrow.Text;
+                var ExpTitle = ExcelLibHelper.ReadData(3, "TitleDrop");
+
+                var actualDegree = EducationDataDegreeFirstrow.Text;
+                var ExpDegree = ExcelLibHelper.ReadData(3, "Degree");
+
+                var actualYear = EducationDataGradYearFirstrow.Text;
+                var ExpYear = ExcelLibHelper.ReadData(3, "Year");
+
+
+                Assert.AreNotEqual(actualCountry, ExpCountry, "Country is not deleted");
+
+                Assert.AreNotEqual(actualColl, ExpColl, "College is not deleted");
+
+                Assert.AreNotEqual(actualTitle, ExpTitle, "Title is not deleted");
+
+                Assert.AreNotEqual(actualDegree, ExpDegree, "Degree is not deleted");
+
+
+                Assert.AreNotEqual(actualYear, ExpYear, "Year is not deleted");
+
+
+            }
+            
+            catch(Exception e)
+            {
+
+
+                Assert.True(true, "No Education Data");
+            }
+
+
+
+
+
+
+
+
+
 
         }
 
