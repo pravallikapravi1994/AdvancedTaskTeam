@@ -64,6 +64,9 @@ namespace MarsQA_1.SpecflowPages.Pages
         private static IWebElement ShareSkill => Driver.driver.FindElement(By.XPath("//*[text()='Share Skill']"));
 
 
+        private static IWebElement EducationAddNew => Driver.driver.FindElement(By.XPath("//div[contains(text(),'Add New')])[3]"));
+
+
 
 
 
