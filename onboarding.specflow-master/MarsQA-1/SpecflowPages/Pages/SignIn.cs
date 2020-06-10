@@ -12,6 +12,8 @@ namespace MarsQA_1.Pages
         private static IWebElement LoginBtn => Driver.driver.FindElement(By.XPath("//BUTTON[@class='fluid ui teal button'][text()='Login']"));
         public static void SigninStep()
         {
+
+            ExcelLibHelper.PopulateInCollection(@"C:\AdvancedTaskLevel1\onboarding.specflow-master\MarsQA-1\SpecflowTests\Data\NewData.xlsx", "Credentials");
             Driver.NavigateUrl();
             SignInBtn.Click();
             Email.SendKeys(ExcelLibHelper.ReadData(2,"username"));
