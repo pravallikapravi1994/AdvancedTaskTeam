@@ -74,7 +74,21 @@ namespace MarsQA_1.SpecflowPages.Pages
 
         private static IWebElement EducationTab => Driver.driver.FindElement(By.XPath("//a[text()='Education']"));
 
+        private static IWebElement CollegeName => Driver.driver.FindElement(By.XPath("//input[@name='instituteName']"));
 
+
+       private static IWebElement CountryDropdown => Driver.driver.FindElement(By.XPath("//select[@name='country']"));
+
+
+        private static IWebElement TitleDropdown => Driver.driver.FindElement(By.XPath("//select[@name='title']"));
+
+
+        private static IWebElement Degree => Driver.driver.FindElement(By.XPath("//input[@name='degree']"));
+
+
+        private static IWebElement GradutionYearDropDown => Driver.driver.FindElement(By.XPath("//select[@name='yearOfGraduation']"));
+
+        private static IWebElement AddButtonEducationData => Driver.driver.FindElement(By.XPath("//input[@value='Add']"));
 
 
 
@@ -221,6 +235,35 @@ namespace MarsQA_1.SpecflowPages.Pages
         public static void AddEducation()
 
         {
+
+            ExcelLibHelper.PopulateInCollection(@"C:\AdvancedTaskLevel1\onboarding.specflow-master\MarsQA-1\SpecflowTests\Data\ProfileData.xlsx", "Education");
+            //Navigate to Education Tab
+            Driver.TurnOnWait();
+            EducationTab.Click();
+
+            //Click on Add new button for education
+            Driver.TurnOnWait();
+            EducationAddNew.Click();
+
+            //Enter Valid Education details 
+            Driver.TurnOnWait();
+
+            CollegeName.SendKeys(ExcelLibHelper.ReadData(2, "CollegeName"));
+
+            SelectElement country = new SelectElement(CountryDropdown);
+            country.SelectByText(ExcelLibHelper.ReadData(2, "CountryOfCollege"));
+
+            SelectElement Titledrop = new SelectElement(TitleDropdown);
+            Titledrop.SelectByText(ExcelLibHelper.ReadData(2, "TitleDrop"));
+
+            Degree.SendKeys(ExcelLibHelper.ReadData(2, "Degree"));
+
+
+
+            SelectElement Yeardrop = new SelectElement(GradutionYearDropDown);
+            Yeardrop.SelectByText(ExcelLibHelper.ReadData(2, "Year"));
+
+            AddButtonEducationData.Click();
 
         }
 
