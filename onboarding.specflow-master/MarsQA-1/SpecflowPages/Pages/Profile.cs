@@ -66,13 +66,13 @@ namespace MarsQA_1.SpecflowPages.Pages
 
         private static IWebElement EducationAddNew => Driver.driver.FindElement(By.XPath("//div[contains(text(),'Add New')])[3]"));
 
+        private static IWebElement CertificationAddNew => Driver.driver.FindElement(By.XPath("//div[contains(text(),'Add New')])[4]"));
 
 
 
+        private static IWebElement CertificateTab => Driver.driver.FindElement(By.XPath("//a[text()='Certifications']"));
 
-
-
-
+        private static IWebElement EducationTab => Driver.driver.FindElement(By.XPath("//a[text()='Education']"));
 
 
 

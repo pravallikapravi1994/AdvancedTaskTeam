@@ -24,15 +24,15 @@ namespace MarsQA_1.Utils
 
         public static Boolean signin = true;
 
+
+
        
-
-
         [BeforeScenario]
         public void Setup()
         {
             //launch the browser
             Initialize();
-            ExcelLibHelper.PopulateInCollection(@"C:\AdvancedTaskLevel1\onboarding.specflow-master\MarsQA-1\SpecflowTests\Data\NewData.xlsx", "Credentials");
+           
 
             if(signin)
             {

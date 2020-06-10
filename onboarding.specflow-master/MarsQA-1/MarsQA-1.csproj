@@ -159,6 +159,7 @@
     <Compile Include="SpecflowPages\Helpers\Driver.cs" />
     <Compile Include="SpecflowPages\Helpers\ExcelLibHelper.cs" />
     <Compile Include="SpecflowPages\Pages\Profile.cs" />
+    <Compile Include="SpecflowPages\Pages\ServiceListing.cs" />
     <Compile Include="SpecflowPages\Pages\SignIn.cs" />
     <Compile Include="SpecflowPages\Pages\Signup.cs" />
     <Compile Include="SpecflowPages\Utils\Start.cs" />
@@ -172,9 +173,9 @@
     <None Include="Featurefiles\1Register.feature" />
     <None Include="license" />
     <None Include="Featurefiles\3Profile.feature" />
-    <None Include="SpecflowTests\Data\Data.xlsx" />
     <None Include="packages.config" />
-    <None Include="SpecflowTests\Data\Mars.xlsx" />
+    <None Include="SpecflowTests\Data\NewData.xlsx" />
+    <None Include="SpecflowTests\Data\ServiceListData.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SpecflowTests\Bind_Steps\" />
