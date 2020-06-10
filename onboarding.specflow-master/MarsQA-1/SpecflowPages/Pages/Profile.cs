@@ -64,7 +64,7 @@ namespace MarsQA_1.SpecflowPages.Pages
         private static IWebElement ShareSkill => Driver.driver.FindElement(By.XPath("//*[text()='Share Skill']"));
 
 
-        private static IWebElement EducationAddNew => Driver.driver.FindElement(By.XPath("//div[contains(text(),'Add New')])[3]"));
+        private static IWebElement EducationAddNew => Driver.driver.FindElement(By.XPath("(//div[contains(text(),'Add New')])[3]"));
 
         private static IWebElement CertificationAddNew => Driver.driver.FindElement(By.XPath("//div[contains(text(),'Add New')])[4]"));
 
@@ -122,6 +122,8 @@ namespace MarsQA_1.SpecflowPages.Pages
         }
 
 
+
+       
 
         public static void AddNewLanguage()
         {
@@ -232,14 +234,21 @@ namespace MarsQA_1.SpecflowPages.Pages
 
         }
 
+
+        public static void NavigateToEducationTab()
+        { 
+            //Navigate to Education Tab
+            Driver.TurnOnWait();
+            EducationTab.Click();
+
+        }
+
         public static void AddEducation()
 
         {
 
             ExcelLibHelper.PopulateInCollection(@"C:\AdvancedTaskLevel1\onboarding.specflow-master\MarsQA-1\SpecflowTests\Data\ProfileData.xlsx", "Education");
-            //Navigate to Education Tab
-            Driver.TurnOnWait();
-            EducationTab.Click();
+          
 
             //Click on Add new button for education
             Driver.TurnOnWait();
